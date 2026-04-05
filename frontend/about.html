@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - FarmLedgers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-section-about {
+            background-image: url('https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header / Navigation -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <!-- Brand Logo -->
+        <div class="flex items-center space-x-2">
+           <img 
+           src="assets/images/farmledger.jpeg" 
+          alt="FarmLedgers Logo"
+         class="h-10 w-auto object-contain"
+        />
+
+            <a href="home.html" class="text-2xl font-bold text-gray-800">FarmLedgers</a>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="home.html"
+                class="text-green-700 text-lg font-semibold transition duration-300 transform hover:scale-110 hover:text-green-800">Home</a>
+            <a href="#about-us-section"
+                class="text-green-700 text-lg font-semibold transition duration-300 transform hover:scale-110 hover:text-green-800">About
+                Us</a>
+            <a href="login.html"
+                class="text-green-700 text-lg font-semibold transition duration-300 transform hover:scale-110 hover:text-green-800">Log
+                In</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="md:hidden">
+            <i class="fas fa-bars text-gray-600 text-2xl"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden px-6 pb-4">
+        <a href="home.html"
+            class="block py-2 text-green-700 text-lg font-semibold transform hover:scale-105 hover:text-green-800 transition duration-300">Home</a>
+        <a href="#about-us-section"
+            class="block py-2 text-green-700 text-lg font-semibold transform hover:scale-105 hover:text-green-800 transition duration-300">About
+            Us</a>
+        <a href="login.html"
+            class="block mt-2 text-center text-green-700 text-lg font-semibold transform hover:scale-105 hover:text-green-800 transition duration-300">Log
+            In</a>
+    </div>
+</header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section-about text-white">
+            <div class="bg-black bg-opacity-60 h-full">
+                <div class="container mx-auto px-6 py-24 md:py-32 text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">We're Cultivating the Future of Farming</h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Learn about our mission, our team, and why we're passionate about helping farmers succeed.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Mission Section -->
+        <section id="about" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="md:flex items-center">
+                    <div class="md:w-1/2">
+                        <img src="assets/images/bg3.png"
+                           alt="Our Team - FarmLedgers"
+                           class="rounded-xl shadow-lg
+                                  w-full
+                                 max-w-md
+                                h-auto
+                                object-cover
+                                mx-auto">                         
+                    </div>
+                    <div class="md:w-1/2 md:pl-12 mt-8 md:mt-0">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4"> Our mission </h2>
+                        <p class="text-gray-600 mb-4 leading-relaxed">The mission of FarmLedgers is to create a clear, secure, and data-based agricultural supply chain that supports farmers and builds trust among all stakeholders. The platform helps ensure fair pricing for farmers, reduces losses after harvest, and makes the movement of crops transparent from farm to market. FarmLedgers uses blockchain technology to safely store crop records so that data cannot be changed or misused. IoT sensors continuously track important quality details such as temperature, humidity, location, and travel time during storage and transportation. Using data analysis and smart pricing methods, the system helps farmers receive fair payment based on crop quality, spoilage risk, market demand, and minimum support price. By reducing middlemen control and improving access to reliable information, FarmLedgers gives farmers real-time insights and helpful recommendations. Overall, the platform aims to support sustainable farming, improve food safety, increase market efficiency, and build consumer trust by providing complete traceability from farm to fork</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Blockchain Technology Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Built on Trust: Our Blockchain Foundation</h2>
+                <p class="text-gray-600 mb-12 max-w-3xl mx-auto">FarmLedgers isn't just another app; it's a decentralized platform designed to put you, the farmer, in complete control. We use cutting-edge blockchain technology to revolutionize how farm data is managed and secured.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-8 rounded-lg bg-white shadow-sm hover:shadow-lg transition duration-300 border border-gray-200">
+                        <i class="fas fa-cubes text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">True Data Ownership</h3>
+                        <p class="text-gray-600">Because we're decentralized, your data is truly yours. It's stored across a secure network, not on a central server, making it resistant to censorship or single points of failure.</p>
+                    </div>
+                    <div class="p-8 rounded-lg bg-white shadow-sm hover:shadow-lg transition duration-300 border border-gray-200">
+                        <i class="fas fa-shield-alt text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Unbreakable Security</h3>
+                        <p class="text-gray-600">Blockchain's cryptographic security makes your records tamper-proof. Every transaction, from planting to sale, is permanently recorded and cannot be altered.</p>
+                    </div>
+                    <div class="p-8 rounded-lg bg-white shadow-sm hover:shadow-lg transition duration-300 border border-gray-200">
+                        <i class="fas fa-link text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Enhanced Transparency</h3>
+                        <p class="text-gray-600">Create a verifiable, transparent history of your products. Build trust with buyers and aggregators by providing an immutable record of your farming practices from seed to sale.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Values Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Our Core Values</h2>
+                <p class="text-gray-600 mb-12">These principles guide everything we do.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-8 rounded-lg bg-gray-50 shadow-sm hover:shadow-lg transition duration-300 border border-gray-200">
+                        <i class="fas fa-leaf text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Farmer-First</h3>
+                        <p class="text-gray-600">Our users are at the heart of our development. We build features that solve real-world farming challenges.</p>
+                    </div>
+                    <div class="p-8 rounded-lg bg-gray-50 shadow-sm hover:shadow-lg transition duration-300 border border-gray-200">
+                        <i class="fas fa-lightbulb text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Simplicity & Power</h3>
+                        <p class="text-gray-600">We believe powerful tools don't have to be complicated. Our platform is easy to learn and use.</p>
+                    </div>
+                    <div class="p-8 rounded-lg bg-gray-50 shadow-sm hover:shadow-lg transition duration-300 border border-gray-200">
+                        <i class="fas fa-handshake-angle text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Integrity & Trust</h3>
+                        <p class="text-gray-600">Your data is yours. We are committed to the highest standards of privacy and security.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Call to Action Section -->
+        <section class="py-20 bg-green-700 text-white">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl font-bold mb-4">Join Our Growing Community</h2>
+                 <p class="text-lg mb-8 max-w-2xl mx-auto">Start making data-driven decisions on your farm today. It's free to get started.</p>
+                 <a href="#" class="bg-white text-green-700 font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition duration-300 text-lg shadow-xl">Get Started Now</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center items-center space-x-2 mb-4">
+                 <img 
+           src="assets/images/farmledger.jpeg" 
+          alt="FarmLedgers Logo"
+         class="h-10 w-auto object-contain"
+        />
+                 <h4 class="text-lg font-semibold">FarmLedgers</h4>
+            </div>
+            <p class="text-gray-400 mb-6">Simplifying Farm Management.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6">
+                <p class="text-gray-500">&copy; 2026 FarmLedgers. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>

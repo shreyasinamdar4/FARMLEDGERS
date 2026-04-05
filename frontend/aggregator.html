@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aggregator</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+body {
+    font-family: 'Inter', sans-serif;
+    background-image: url('https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+</head>
+
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+<nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+
+<div class="flex items-center space-x-2">
+<img src="assets/images/farmledger.jpeg" alt="FarmLedgers Logo" class="h-10 w-auto object-contain"/>
+<a href="home.html" class="text-2xl font-bold text-gray-800">FarmLedgers</a>
+</div>
+
+<div class="hidden md:flex items-center space-x-8">
+<a href="home.html" class="text-green-700 text-lg font-semibold">Home</a>
+<a href="#" class="text-green-700 text-lg font-semibold">About Us</a>
+<a href="login.html" class="text-green-700 text-lg font-semibold">Log In</a>
+</div>
+
+</nav>
+</header>
+
+<!-- Main Content -->
+<div class="flex items-center justify-center min-h-screen p-4 pt-28">
+<div class="w-full max-w-3xl bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg">
+
+<div class="text-center mb-8">
+<h1 class="text-3xl font-bold text-gray-800">Aggregator Panel</h1>
+<p class="text-gray-600 mt-2">Farmer + Batch Data Entry</p>
+</div>
+
+<form id="batchForm" class="space-y-6">
+
+<!-- Crop Source Section -->
+<h2 class="text-xl font-semibold text-gray-800">Crop Source Details</h2>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Farm Region</label>
+<input type="text" required
+placeholder="e.g. Paithan, Sambhajinagar"
+class="w-full px-4 py-2 border rounded-lg">
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Cultivation Method</label>
+<select required class="w-full px-4 py-2 border rounded-lg">
+<option value="">Select Method</option>
+<option>Organic</option>
+<option>Conventional</option>
+<option>Hybrid</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Crop Variety Code</label>
+<input type="text" required placeholder="e.g. WHT-204"
+class="w-full px-4 py-2 border rounded-lg">
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Harvest Start Date</label>
+<input type="date" required class="w-full px-4 py-2 border rounded-lg">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Harvest End Date</label>
+<input type="date" required class="w-full px-4 py-2 border rounded-lg">
+</div>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Natural Risk Exposure Index</label>
+<input type="text"
+placeholder="Rainfall deviation / Heat stress score"
+class="w-full px-4 py-2 border rounded-lg">
+</div>
+
+<hr class="my-6">
+
+<!-- Batch Section -->
+<h2 class="text-xl font-semibold text-gray-800">Batch Details</h2>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Batch ID</label>
+<input type="text" id="batchId" readonly
+class="w-full px-4 py-2 border rounded-lg bg-gray-100 cursor-not-allowed">
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">
+Quantity Collected
+</label>
+<input id="quantity" type="number" required placeholder="e.g. 500"
+class="w-full px-4 py-2 border rounded-lg">
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">
+Visual Quality Grade
+</label>
+<select id="grade" required class="w-full px-4 py-2 border rounded-lg">
+<option value="">Select</option>
+<option>A</option>
+<option>B</option>
+<option>C</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">
+Time Delay (Harvest → Collection hours)
+</label>
+<input id="delay" type="number" required placeholder="e.g. 6"
+class="w-full px-4 py-2 border rounded-lg">
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">
+Batch Tempering Risk Score
+</label>
+<select required class="w-full px-4 py-2 border rounded-lg">
+<option value="">Select</option>
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">
+Collection Verification Timestamp
+</label>
+<input type="datetime-local" required
+class="w-full px-4 py-2 border rounded-lg">
+</div>
+
+<button type="submit"
+class="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700">
+Submit Batch Data
+</button>
+
+</form>
+</div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+<div class="container mx-auto px-6 text-center">
+<p class="text-gray-500">&copy; 2026 FarmLedgers. All Rights Reserved.</p>
+</div>
+</footer>
+
+<script>
+function generateBatchId(){
+ return "BAT-"+Date.now().toString(36).toUpperCase();
+}
+
+document.getElementById("batchId").value = generateBatchId();
+
+document.getElementById("batchForm").addEventListener("submit", async e=>{
+ e.preventDefault();
+
+ const batch = {
+    batchId: document.getElementById("batchId").value,
+    quantity: document.getElementById("quantity").value,
+    grade: document.getElementById("grade").value,
+    delay: document.getElementById("delay").value,
+    risk: "Low"
+  };
+
+ localStorage.setItem("batchId", batch.batchId);
+
+ await fetch("/api/batch",{
+   method:"POST",
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify(batch)
+ });
+
+ alert("Batch saved!");
+});
+</script>
+
+</body>
+</html>

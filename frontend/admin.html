@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin Dashboard | FarmLedgers</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+
+<!-- ================= HEADER ================= -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-3">
+      <img src="assets/images/farmledger.jpeg" alt="FarmLedgers Logo" class="h-10 w-10 object-contain">
+      <span class="text-2xl font-bold text-green-700">FarmLedgers Admin</span>
+    </div>
+    <a href="home.html" class="text-green-700 text-lg font-semibold">Home</a>
+  </nav>
+</header>
+
+<!-- ================= TABS ================= -->
+<div class="container mx-auto px-6 py-6">
+  <div class="flex flex-wrap gap-3 mb-6">
+    <button onclick="showTab('AggregatorCombined')" class="tabBtn bg-green-600 text-white px-4 py-2 rounded">
+       Aggregator
+    </button>
+    <button onclick="showTab('Warehouse')" class="tabBtn bg-gray-200 px-4 py-2 rounded">Warehouse</button>
+    <button onclick="showTab('Transport')" class="tabBtn bg-gray-200 px-4 py-2 rounded">Transport</button>
+    <button onclick="showTab('Retailer')" class="tabBtn bg-gray-200 px-4 py-2 rounded">Retailer</button>
+  </div>
+
+  <!-- ================= AGGREGATOR ================= -->
+   <div id="AggregatorCombined" class="actorTab">
+  <h2 class="text-2xl font-bold mb-4 text-center">
+    Aggregator Batch Data
+  </h2>
+
+  <div class="overflow-x-auto">
+    <table class="w-full bg-white text-sm border border-black">
+      <thead class="bg-green-600 text-white">
+        <tr>
+          <th class="p-2 border border-black">Batch ID</th>
+          <th class="p-2 border border-black">Quantity Collected</th>
+          <th class="p-2 border border-black">Quality Grade</th>
+          <th class="p-2 border border-black">Delay (hrs)</th>
+          <th class="p-2 border border-black">Risk Level</th>
+          <th class="p-2 border border-black">Timestamp</th>
+        </tr>
+      </thead>
+      <tbody id="aggregatorCombinedTable"></tbody>
+    </table>
+  </div>
+</div>
+
+
+  <!-- ================= WAREHOUSE ================= -->
+  <div id="Warehouse" class="actorTab hidden">
+  <h2 class="text-xl font-bold mb-4">Warehouse Data</h2>
+
+  <table class="w-full bg-white text-sm border border-black">
+    <thead class="bg-green-600 text-white">
+      <tr>
+        <th class="p-2 border border-black">ID</th>
+        <th class="p-2 border border-black">Batch ID</th>
+        <th class="p-2 border border-black">Temperature</th>
+      </tr>
+    </thead>
+
+    <tbody id="warehouseTable"></tbody>
+  </table>
+</div>
+
+
+  <!-- ================= TRANSPORT ================= -->
+ <div id="Transport" class="actorTab hidden">
+  <h2 class="text-xl font-bold mb-4">Transport Data</h2>
+
+  <table class="w-full bg-white text-sm border border-black">
+    <thead class="bg-green-600 text-white">
+      <tr>
+        <th class="p-2 border border-black">Batch ID</th>
+        <th class="p-2 border border-black">From Location</th>
+        <th class="p-2 border border-black">To Location</th>
+        <th class="p-2 border border-black">Vehicle ID</th>
+        <th class="p-2 border border-black">Vehicle Type</th>
+        <th class="p-2 border border-black">Transit Start</th>
+        <th class="p-2 border border-black">Transit End</th>
+        <th class="p-2 border border-black">Temp Score</th>
+        <th class="p-2 border border-black">Arrival Time</th>
+      </tr>
+    </thead>
+
+    <tbody id="transportTable"></tbody>
+  </table>
+</div>
+
+  <!-- ================= RETAILER ================= -->
+<div id="Retailer" class="actorTab hidden">
+  <h2 class="text-xl font-bold mb-4">Retailer Data</h2>
+
+  <table class="w-full bg-white text-sm border border-black">
+    <thead class="bg-green-600 text-white">
+      <tr>
+        <th class="p-2 border border-black">Batch ID</th>
+        <th class="p-2 border border-black">Store Name</th>
+        <th class="p-2 border border-black">Quantity Received</th>
+        <th class="p-2 border border-black">Arrival Time</th>
+        <th class="p-2 border border-black">QR Code</th>
+        <th class="p-2 border border-black">Sale Quantity</th>
+        <th class="p-2 border border-black">Sale Time</th>
+        <th class="p-2 border border-black">Notes</th>
+      </tr>
+    </thead>
+
+    <tbody id="retailerTable"></tbody>
+  </table>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+const allData = JSON.parse(localStorage.getItem("supplyChainData")) || [];
+
+/* ---------------- TAB SWITCHING ---------------- */
+function showTab(tab, e){
+  document.querySelectorAll(".actorTab").forEach(t => t.classList.add("hidden"));
+  document.getElementById(tab).classList.remove("hidden");
+
+  document.querySelectorAll(".tabBtn").forEach(b=>{
+    b.classList.remove("bg-green-600","text-white");
+    b.classList.add("bg-gray-200");
+  });
+
+  if(e){
+    e.target.classList.add("bg-green-600","text-white");
+    e.target.classList.remove("bg-gray-200");
+  }
+}
+
+/* ---------------- MOBILE MENU ---------------- */
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if(mobileMenuButton) {
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+}
+
+
+/* ---------------- LOAD AGGREGATOR DATA FROM DB ---------------- */
+async function loadAggregatorData(){
+  try{
+    const res = await fetch("/api/aggregator");
+    const data = await res.json();
+
+    const tableBody = document.getElementById('aggregatorCombinedTable');
+    if(!tableBody) return;
+
+    tableBody.innerHTML = "";
+
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td class="p-2 border border-black">${row.batch_id || ""}</td>
+        <td class="p-2 border border-black">${row.quantity || ""}</td>
+        <td class="p-2 border border-black">${row.grade || ""}</td>
+        <td class="p-2 border border-black">${row.delay || ""}</td>
+        <td class="p-2 border border-black">${row.risk || ""}</td>
+        <td class="p-2 border border-black">${row.timestamp || ""}</td>
+      `;
+
+      tableBody.appendChild(tr);
+    });
+
+  } catch(err){
+    console.error("Failed loading aggregator data:", err);
+  }
+}
+
+/* Load data when page opens */
+loadAggregatorData();
+
+/* ---------------- AGGREGATOR FORM ---------------- */
+const batchForm = document.getElementById('batchForm');
+const batchIdInput = document.getElementById('batchId');
+
+if(batchIdInput) batchIdInput.value = 'BATCH-' + Date.now();
+
+if(batchForm){
+  batchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = {
+      batchId: batchForm[6].value,
+      quantity: batchForm[7].value,
+      grade: batchForm[8].value,
+      delay: batchForm[9].value,
+      risk: batchForm[10].value,
+      timestamp: new Date().toLocaleString()
+    };
+
+    const tableBody = document.getElementById('aggregatorCombinedTable');
+
+    if(tableBody){
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td class="p-2 border border-black">${formData.batchId}</td>
+        <td class="p-2 border border-black">${formData.quantity}</td>
+        <td class="p-2 border border-black">${formData.grade}</td>
+        <td class="p-2 border border-black">${formData.delay}</td>
+        <td class="p-2 border border-black">${formData.risk}</td>
+        <td class="p-2 border border-black">${formData.timestamp}</td>
+      `;
+
+      tableBody.appendChild(row);
+    }
+
+    batchForm.reset();
+    batchIdInput.value = 'BATCH-' + Date.now();
+  });
+}
+//warehouse
+async function loadWarehouseData(){
+  try{
+    const res = await fetch("/api/warehouse");
+    const data = await res.json();
+
+    const tableBody = document.getElementById("warehouseTable");
+    if(!tableBody) return;
+
+    tableBody.innerHTML = "";
+
+    data.forEach(row => {
+      const tr = document.createElement("tr");
+
+      tr.innerHTML = `
+        <td class="p-2 border border-black">${row.id || ""}</td>
+        <td class="p-2 border border-black">${row.batch_id || ""}</td>
+        <td class="p-2 border border-black">${row.temperature || ""}</td>
+      `;
+
+      tableBody.appendChild(tr);
+    });
+
+  } catch(err){
+    console.error("Warehouse load error:", err);
+  }
+}
+
+loadWarehouseData();
+
+//transport
+/* -------- LOAD TRANSPORT DATA -------- */
+async function loadTransportData(){
+  try{
+    const res = await fetch("/api/transport");
+    const data = await res.json();
+
+    const tableBody = document.getElementById("transportTable");
+    if(!tableBody) return;
+
+    tableBody.innerHTML = "";
+
+    data.forEach(row=>{
+      const tr = document.createElement("tr");
+
+      tr.innerHTML = `
+        <td class="p-2 border border-black">${row.batch_id || ""}</td>
+        <td class="p-2 border border-black">${row.from_location || ""}</td>
+        <td class="p-2 border border-black">${row.to_location || ""}</td>
+        <td class="p-2 border border-black">${row.vehicle_id || ""}</td>
+        <td class="p-2 border border-black">${row.vehicle_type || ""}</td>
+        <td class="p-2 border border-black">${row.start_time || ""}</td>
+        <td class="p-2 border border-black">${row.end_time || ""}</td>
+        <td class="p-2 border border-black">${row.temp_score || ""}</td>
+        <td class="p-2 border border-black">${row.arrival_time || ""}</td>
+      `;
+
+      tableBody.appendChild(tr);
+    });
+
+  } catch(err){
+    console.error("Transport load error:", err);
+  }
+}
+
+loadTransportData();
+
+
+/* -------- LOAD RETAILER DATA -------- */
+async function loadRetailerData(){
+  try{
+    const res = await fetch("/api/retailer");
+    const data = await res.json();
+
+    const tableBody = document.getElementById("retailerTable");
+    if(!tableBody) return;
+
+    tableBody.innerHTML = "";
+
+    data.forEach(row => {
+      const tr = document.createElement("tr");
+
+      tr.innerHTML = `
+        <td class="p-2 border border-black">${row.batch_id || ""}</td>
+        <td class="p-2 border border-black">${row.store_name || ""}</td>
+        <td class="p-2 border border-black">${row.quantity_received || ""}</td>
+        <td class="p-2 border border-black">${row.arrival_time || ""}</td>
+        <td class="p-2 border border-black">${row.qr_code || ""}</td>
+        <td class="p-2 border border-black">${row.sale_quantity || ""}</td>
+        <td class="p-2 border border-black">${row.sale_time || ""}</td>
+        <td class="p-2 border border-black">${row.notes || ""}</td>
+      `;
+
+      tableBody.appendChild(tr);
+    });
+
+  } catch(err){
+    console.error("Retailer data load failed:", err);
+  }
+}
+
+loadRetailerData();
+
+
+
+</script>
+
+
+</body>
+</html>
