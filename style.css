@@ -1,0 +1,146 @@
+/* body {
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  margin: 0;
+  padding: 0;
+} */
+
+/* Header */
+header {
+  background: #2e7d32;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+}
+
+/* Main container */
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px;
+
+  background: rgba(255, 255, 255, 0);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Labels */
+label {
+  font-weight: bold;
+}
+
+/* Inputs */
+input {
+  width: 95%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #a5d6a7;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Button */
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1b5e20;
+}
+
+.btn-space {
+  margin-top: 12px;
+}
+
+/* Result */
+#result {
+  text-align: center;
+  margin-top: 20px;
+  color: white;
+}
+
+/* Dashboard info */
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #e8f5e9;
+  padding: 10px;
+  border-radius: 8px;
+  width: 30%;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Footer */
+footer {
+  background: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+}
+
+
+
+/* Page background */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("agri.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.records-table th,
+.records-table td {
+  border: 1px solid rgba(255, 255, 255, 0.6); 
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+.records-table th {
+  background: rgba(46, 125, 50, 0.8);
+}
+
+/* .records-table td {
+  background: rgba(255, 255, 255, 0.15);
+} */

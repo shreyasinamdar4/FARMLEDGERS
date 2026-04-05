@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Saved Fair Prices</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>Saved Fair Pricing Records</header>
+
+<div class="cntr">
+  <table class="records-table">
+    <thead>
+      <tr>
+        <th>Supply</th>
+        <th>Demand</th>
+        <th>MSP</th>
+        <th>Price</th>
+        <th>Fair Price</th>
+        <th>Date and Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+<script>
+let records = JSON.parse(localStorage.getItem("fairPrices")) || [];
+const tableBody = document.getElementById("tableBody");
+
+function renderTable() {
+  tableBody.innerHTML = "";
+
+  records.forEach((r, index) => {
+    const row = `
+      <tr>
+        <td>${r.supply}</td>
+        <td>${r.demand}</td>
+        <td>${r.msp}</td>
+        <td>${r.historicalPrice}</td>
+        <td>₹${r.fairPrice}</td>
+        <td>${r.time}</td>
+        <td>
+          <button onclick="deleteRecord(${index})">Delete</button>
+        </td>
+      </tr>
+    `;
+    tableBody.innerHTML += row;
+  });
+}
+
+function deleteRecord(index) {
+  if (confirm("Are you sure you want to delete this record?")) {
+    records.splice(index, 1);   // remove selected record
+    localStorage.setItem("fairPrices", JSON.stringify(records));
+    renderTable();              // refresh table
+  }
+}
+
+renderTable(); // initial load
+</script>
+
+</body>
+</html>

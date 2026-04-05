@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fair Pricing Module</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    Blockchain Based Fair Pricing System
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+
+    <h2>Fair Pricing Calculator</h2>
+
+    <!-- Dashboard cards -->
+    <div class="dashboard">
+      <div class="card">Supply Based Pricing</div>
+      <div class="card">MSP Protection</div>
+      <div class="card">Data Driven Pricing</div>
+    </div>
+
+    <!-- Inputs (THIS IS YOUR SAME CODE, JUST WITH LABELS) -->
+    <label>Supply</label>
+    <input id="supply">
+
+    <label>Demand</label>
+    <input id="demand">
+
+    <label>MSP</label>
+    <input id="msp">
+
+    <label>Historical Price</label>
+    <input id="price">
+
+    <button onclick="calculate()">Get Fair Price</button>
+    <button class="btn-space" onclick="savePrice()">Save Fair Price</button>
+    <button class="btn-space" onclick="window.location.href='records.html'">View Saved Prices</button>
+
+
+    <h3 id="result"></h3>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Blockchain Based Agricultural Supply Chain Project
+  </footer>
+
+  <script>
+    let lastSupply = 0;
+    let lastDemand = 0;
+    let lastMSP = 0;
+    let lastPrice = 0;
+
+    async function calculate() {
+
+     // Read values (if empty, keep previous)
+     const supplyInput = document.getElementById("supply").value;
+     const demandInput = document.getElementById("demand").value;
+     const mspInput = document.getElementById("msp").value;
+     const priceInput = document.getElementById("price").value;
+
+     if (supplyInput !== "") lastSupply = Number(supplyInput);
+     if (demandInput !== "") lastDemand = Number(demandInput);
+     if (mspInput !== "") lastMSP = Number(mspInput);
+     if (priceInput !== "") lastPrice = Number(priceInput);
+
+     // Validation: check for invalid or missing inputs
+     if (
+      isNaN(lastSupply) || isNaN(lastDemand) ||
+      isNaN(lastMSP) || isNaN(lastPrice) ||
+      lastSupply <= 0 || lastDemand <= 0 ||
+      lastMSP <= 0 || lastPrice <= 0
+     ) {
+      document.getElementById("result").innerText = "";
+      alert("Invalid input! Please enter positive numeric values.");
+      return;
+     }
+
+     const data = {
+      supply: lastSupply,
+      demand: lastDemand,
+      msp: lastMSP,
+      historicalPrice: lastPrice
+     };
+
+     const response = await fetch("http://localhost:3000/fair-price", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+     });
+
+     const result = await response.json();
+
+     document.getElementById("result").innerText = "Fair Price = ₹" + result.fairPrice.toFixed(2);
+    }
+  </script>
+
+<script>
+function savePrice() {
+  const resultText = document.getElementById("result").innerText;
+
+  if (resultText === "") {
+    alert("Please calculate fair price first");
+    return;
+  }
+
+  const record = {
+    supply: lastSupply,
+    demand: lastDemand,
+    msp: lastMSP,
+    historicalPrice: lastPrice,
+    fairPrice: resultText.replace("Fair Price = ₹", ""),
+    time: new Date().toLocaleString()
+  };
+
+  let records = JSON.parse(localStorage.getItem("fairPrices")) || [];
+  records.push(record);
+  localStorage.setItem("fairPrices", JSON.stringify(records));
+
+  alert("Fair price saved successfully!");
+}
+</script>
+
+<!-- <a href="records.html" style="color:white;">View Saved Prices</a> -->
+<a href="records.html">View Saved Prices</a>
+
+</body>
+</html>
